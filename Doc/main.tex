@@ -1,0 +1,55 @@
+\documentclass{Resources/netsci-project}
+
+
+% :::~ This is the configuration for the bibliography. DO NOT CHANGE
+\usepackage[
+    backend=biber,
+    style=authoryear,
+    natbib=false,
+    maxcitenames=2,
+    minbibnames=1, maxbibnames=99, 
+    url=false, 
+    doi=true,
+    ]{biblatex}
+    
+    
+\addbibresource{References/thesis.bib}
+
+\subjectarea{Network Science}
+
+\begin{document}
+\firstpage{1}
+
+\title{Final Project}
+\author{Mathias Lüthi (00-000-000), Nino Scherrer (00-000-000), Peter Giger (14-915-383)}
+\course{Network Science for Business, Economics, Informatics and Social Sciences}
+\school{Faculty of Business, Economics and Informatics}
+\date{09.12.2019}
+
+\maketitle
+
+\begin{abstract}
+Railway networks are of great importance for every economy \autocite{Resilience}. Thus, it is all the more important to understand the reasons why and how they can fail. Yet, due to the size and complexity, their susceptibility to failures is not completely understood \autocite{Resilience}. This research project investigates the vulnerability of the Swiss railway network using network scientific models.
+\end{abstract}
+
+
+\section{Introduction}
+Railway systems need to perform well even under suboptimal circumstances \autocite{Resilience}. Cascade delays and cancellations are daily challenges for both passengers and railway companies \autocite{Resilience}. Existing research showed that the network topology has an effect on the performance of a railway system \autocite{ComplexTopology}. More recently, \textcite{Resilience} analyzed the resilience and robustness of a UK railway network. They showed that poor performance correlates more with cascade effects that failures \autocite{Resilience}.
+\\~\\
+Needless to say, the are many reasons why railway systems can fail. For this reason, the focus of this study is the Swiss railway system for which only few studies exist. In 2008, the authors \textcite{GraphSwiss} published a graph-theoretical analysis of the Swiss railway network over time. They've used measures such as degree/betweenness centrality to characterise the growth of the Railway network \autocite{GraphSwiss}. However, they've suggested further research to explain the robustness of the network. In 2009, the authors \textcite{VulnerabilitySwiss} proposed a generalized linear model (GLM) to assess the vulnerability of the Swiss road network. The downside of their approach is that they assumed the failures to be mutually exclusive \autocite{VulnerabilitySwiss}. 
+\\~\\
+This research projects extends the work of \textcite{GraphSwiss} and \textcite{VulnerabilitySwiss} using network scientific models. The primary focus is to analyze the Swiss railway network regarding graph characteristics and vulnerabilities.
+
+\subsection{Transport Networks}
+Transport networks are essential for people and economy \autocite{GraphSwiss} . Early research on transport networks focused on geometric and topological properties \autocite{GraphSwiss} . Later, with the availability of computational power, the research shifted towards network structures \autocite{GraphSwiss}. Recently, papers such as \textcite{Resilience} and \textcite{ComplexDelay} used graph properties to model robustness and delay dynamics.
+\\~\\
+There are several differences to other networks such as social networks \autocite{GraphSwiss}. Transport networks represent real objects such as lines and railway stations \autocite{GraphSwiss}. These physical objects have constraints themselves which influences the degree distribution \autocite{GraphSwiss}. Additionally, monetary constraints apply as well, thus restrict the ability for them to be scale-free \autocite{GraphSwiss}.
+
+\subsection{The Swiss Railway Network}
+According to the "European Railway Performance Index", Switzerland has one of the best performing railways  \autocite{RailwayPerformanceIndex}. Yet, the increased load over the past years is a constant challenge. Every delay or cancellation might result in cascade failures.
+\\~\\
+Every railway network is slightly different. This is due to their history and how they grew over the years \autocite{GraphSwiss}. The Swiss railway network is special because its early growth was purely driven by economic values \autocite{GraphSwiss}. This means that cities were prioritized and urban areas were not considered in the planning process \autocite{GraphSwiss}. Moreover, due to competition of private companies, the networks grew more or less independent of each other \autocite{GraphSwiss}. Today, most railways belong to the Swiss Federal Railways (SBB).
+
+\printbibliography
+
+\end{document}
