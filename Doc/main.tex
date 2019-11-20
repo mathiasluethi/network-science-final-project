@@ -20,8 +20,8 @@
 \begin{document}
 \firstpage{1}
 
-\title{Final Project}
-\author{Mathias Lüthi (00-000-000), Nino Scherrer (00-000-000), Peter Giger (14-915-383)}
+\title{Final Project: Network scientific analysis about the vulnerability of the Swiss Railway network}
+\author{Mathias Lüthi (15-707-037), Nino Scherrer (12-729-216), Peter Giger (14-915-383)}
 \course{Network Science for Business, Economics, Informatics and Social Sciences}
 \school{Faculty of Business, Economics and Informatics}
 \date{09.12.2019}
@@ -49,6 +49,40 @@ There are several differences to other networks such as social networks \autocit
 According to the "European Railway Performance Index", Switzerland has one of the best performing railways  \autocite{RailwayPerformanceIndex}. Yet, the increased load over the past years is a constant challenge. Every delay or cancellation might result in cascade failures.
 \\~\\
 Every railway network is slightly different. This is due to their history and how they grew over the years \autocite{GraphSwiss}. The Swiss railway network is special because its early growth was purely driven by economic values \autocite{GraphSwiss}. This means that cities were prioritized and urban areas were not considered in the planning process \autocite{GraphSwiss}. Moreover, due to competition of private companies, the networks grew more or less independent of each other \autocite{GraphSwiss}. Today, most railways belong to the Swiss Federal Railways (SBB).
+
+\section{Measures}
+This section described the basic measures used in this research project.
+
+\subsection{Degree Centrality}
+The degree centrality is a fundamental measure based on the degree of the node \autocite{ComplexTopology}. The degree represents the number of connections a node has \autocite{ComplexTopology}. Hence, the degree centrality assumes that nodes with a large number of connections are more important \autocite{ComplexTopology}. It was first introduced by \textcite{Freeman} and \textcite{Freeman2}:
+\begin{equation} \label{eqRestMass}
+C_{i}^{D} = \dfrac{k_i}{N-1}
+\end{equation}
+where 
+\begin{equation} \label{eqRestMass}
+k_{i} = \sum_{j \in N}a_{ij}
+\end{equation}
+In railway networks, the degree centrality is constrained by spacial and economic limits \autocite{GraphSwiss}.
+
+\subsection{Betweenness Centrality}
+The betweenness centrality is the number of shortest paths passing through the node \autocite{ComplexTopology}. It was introduced  by \textcite{Freeman} and \textcite{Freeman2} as well:
+\begin{equation} \label{eqRestMass}
+C_{i}^{B} = \sum_{j \neq k} \dfrac{n_{jk}(i)}{n_{jk}}
+\end{equation}
+where, for the nodes $ j $ and $ k $, the shortest path is defined by $n_{jk}(i) $. In transportation networks, the betweenness centrality can be used to measure the impact of a node. \autocite{ComplexTopology}.
+
+\subsection{Closeness Centrality}
+The closeness centrality measures how close the node is to all other nodes \autocite{ComplexTopology}. It is therefore the inverse of the mean shortest path to all other nodes and defined as: \autocite{ComplexTopology}
+\begin{equation} \label{eqRestMass}
+C_{i}^{C} =\dfrac{1}{\sum_{j \neq i} d_{ij}}
+\end{equation}
+The closeness centrality depends on the geographic position of the nodes as well as the size of the network \autocite{GraphSwiss}. This restricts the comparability of different sized networks \autocite{GraphSwiss}..
+
+\subsection{Clustering Coefficient}
+The clustering coefficient measures the probability of two neighbours being connected \autocite{ComplexTopology}. It can therefore be defined as:
+\begin{equation} \label{eqRestMass}
+C_{i} =\dfrac{2m_i}{k_i(k_i -1)}
+\end{equation}
 
 \printbibliography
 
