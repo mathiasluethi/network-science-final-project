@@ -1,0 +1,84 @@
+node added from Zürich, Hirzenbach to Neugut West bei DUE (Abzw)
+node added from Zürich, Wollishofen (Wds) to Zürich Manegg
+node added from Arlesheim Dorf (Wds) to Dornach-Arlesheim
+node added from Basel, Depot Wiesenplatz to Basel Bad Rbf KH (Abzw)
+node added from Göschenen Bahnhofplatz to Göschenen
+node added from Zermatt to Gampel-Steg
+node added from Bern, Zytglogge Gleisende to Bern
+node added from Solothurn [Gleis 9-10] to Solothurn
+node added from Genève-Eaux-Vives, gare to Genève
+node added from Meyrin, Gravière fin de voie to Vernier-Meyrin Cargo
+node added from Meiringen Ost to Gletsch
+node added from Interlaken Brünig (Gleisende) to Interlaken Ost [Gleis 5-8]
+node added from Leysin-Feydey to Aigle
+node added from Monthey-Hôpital to Monthey
+node added from Altstätten Stadt to Altstätten SG
+node added from Wasserauen to Salez-Sennwald
+node added from Langenthal [Gleis 4-5] to Langenthal
+node added from St. Urban Ziegelei to Roggwil-Wynau
+node added from Schöftland to Kölliken Oberdorf
+node added from Menziken to Mosen
+node added from Glovelier [voie 12-13] to Glovelier
+node added from Tavannes [voie étroite] to Tavannes
+node added from Jungfraujoch to Bönigen Gleisende
+node added from Interlaken Ost [Gleis 1-2] to Interlaken Ost [Gleis 3-4]
+node added from L'Isle to Cossonay-Penthalaz
+node added from Morges [voie 5-6] to Morges
+node added from Bex place de la gare to Bex
+node added from Col-de-Bretaye to Exergillod
+node added from Bercher to Moudon
+node added from Lausanne-Flon (LEB) to Lausanne-Flon (m1)
+node added from Wohlen BDWM-bd to Wohlen
+node added from Dietikon BDWM-bd to Dietikon
+node added from La Cure to Prangins
+node added from Nyon [gare souterraine] to Nyon
+node added from Ins [Gleis 11] to Ins
+node added from Biel/Bienne [Gleis 11/voie 11] to Biel/Bienne
+node added from Montreux MVR-mtgn to Montreux-Collège
+node added from Rochers-de-Naye to Jor
+node added from Esslingen to Uetikon
+node added from Zürich Rehalp to Zürich, Rehalp
+node added from Rigi Kulm to Brunnmatt (Spw)
+node added from Vitznau to Arth-Goldau
+node added from Locarno FART to Locarno
+node added from Ribellasca Confine to Pino confine
+node added from Wil (FF-Wil Bahn) to Wil
+node added from Frauenfeld FW Bahn Gleisende to Frauenfeld
+node added from St. Gallen AB to St. Gallen
+node added from Trogen to Bühler
+node added from Boudry Littorail to Boudry
+node added from Neuchâtel,Place Pury Littorail to Neuchâtel-Vauseyon (bif)
+node added from Liestal [Gleis 4] to Liestal
+node added from Waldenburg to Buckten
+node added from Ouchy to Lausanne Est
+node added from Epalinges, Croisettes to Pully-Nord
+node added from Les Ponts-de-Martel to Noiraigue
+node added from La Chaux-de-Fonds [voie 2] to La Chaux-de-Fonds [voie 1]
+node added from Lugano FLP to Lugano
+node added from Ponte Tresa to Melide Centrale (bif)
+node added from Champéry to Monthey-Hôpital
+node added from Chemex to Monthey-Hôpital
+node added from Le Châtelard-Frontière to Martigny-Croix
+node added from Martigny [voie 40] to Martigny
+node added from Chur Arosabahn to Chur [Gleis 10-14]
+node added from Arosa to Davos Glaris
+node added from Yverdon-les-Bains TRAVYS to Yverdon-les-Bains
+node added from Ste-Croix to Buttes
+node added from Zermatt GGB to Zermatt
+node added from Gornergrat to Zermatt
+node added from Walzenhausen to Rheineck
+node added from Rheineck [Gleis 0] to Rheineck
+node added from Generoso Vetta to Maroggia-Melano
+node added from Capolago-Riva S. Vitale MG to Capolago-Riva S. Vitale
+node added from Les Brenets to Le Locle-Frontière
+node added from Le Locle [voie 3] to Le Locle
+node added from Zürich, Römerhof to Zürich, Römerhof (DBZ)
+node added from Zürich, Dolder to Zürich, Susenbergstrasse
+node added from Alpnachstad PB to Alpnachstad
+node added from Pilatus Kulm to Alpnachstad
+node added from Mürren BLM to Wengernalp
+node added from Grütschalp to Lauterbrunnen
+node added from Brienzer Rothorn to Brienz
+node added from Brienz BRB to Brienz
+node added from Les Montuires to Le Châtelard VS
+node added from Pied du barrage to Le Châtelard-Frontière
