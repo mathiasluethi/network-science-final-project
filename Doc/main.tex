@@ -1,5 +1,5 @@
 \documentclass{Resources/netsci-project}
-
+\usepackage{caption}
 
 % :::~ This is the configuration for the bibliography. DO NOT CHANGE
 \usepackage[
@@ -83,6 +83,32 @@ The clustering coefficient measures the probability of two neighbours being conn
 \begin{equation} \label{eqRestMass}
 C_{i} =\dfrac{2m_i}{k_i(k_i -1)}
 \end{equation}
+
+\section{Data}
+The Dataset analysed in this research project is from the \textcite{Dataset} and represents the Swiss Railway and Tram Network. It contains 3’190 Railway and Tram stations all over Switzerland with 3'353 connections between them. While creating the graph for the network, we assigned the names of the stations as well as their location coordinates to the nodes.
+\\~\\
+Some of the bigger stations are subdivided into several sub-stations, for example the station "Interlaken Ost" is sectioned by platforms ("Platform 1-2", "Platform 3-4", "Platform 5-8"). This leads to the existence of nodes, whose spatial distance is rather small nevertheless they are not connected. The network is divided in 47 connected components, from which the giant connected component includes 1650 nodes, which is around 53\% of the whole network. There are four nodes, which are not connected to any other node in the network. These nodes were excluded for the analysis of the network.
+\\~\\
+Because of the fact that the network is divided in many connected components and the existence of close but not connected nodes, we decided to adjust the network. Nodes whose spatial distance is less than 300 meters and no path between them exist, are merged to one node that includes the connections of all the merged nodes. This modification relies on the assumption that these nodes belong to the same station or are at least located in walking distance. This results in a network with 3'146 nodes and 3'351 edges. The number of connected components is reduced to five, from which the giant connected component contains 99\% of all nodes in the network (3’116/3’146). Figure \ref{fig:degree_distribution} shows the degree distribution of the network.
+
+\begin{center}
+    \centering
+    \includegraphics[width=300pt]{Resources/degree_distribution}
+    \captionof{figure}{Degree Distribution of the Swiss Railway Network}
+    \label{fig:degree_distribution}
+\end{center}
+The emergence of the Railway network characterizes its degree distribution. There are few nodes with a relatively high degree, which represent the biggest traffic hubs and are located in the economically most important cities of Switzerland (e.g. Zurich and Basel). Most nodes do have two connections to other stations. This follows the characteristic that most routes are straight lines going through nodes and ending in a node with degree one. Furthermore, it also explains the low clustering discovered in the network ($ C = 0.016 $). Last but not least, the distribution results in an average degree close to two ($ <k> = 2.13 $). 
+
+\section{Conclusion}
+The Swiss Railway network is important to the Swiss citizens as well as the Swiss economy. Yet, increasing demand and tight schedules are a constant challence. However, there is a limit to the network especially because few new lines are added. This means that it is all the more important to understand how delays or failures influence the network.
+\\~\\
+This research project investigated the vulnerability of the Swiss Railway network. 
+\\~\\
+An appropriate countermeasure could be to split important stations into independent sub-networks such that a failure does not propagate through the whole network. 
+\\~\\
+This research project does not cover...
+\\~\\
+It remains to be further investigated...
 
 \printbibliography
 
