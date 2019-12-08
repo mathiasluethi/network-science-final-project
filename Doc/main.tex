@@ -89,7 +89,7 @@ C_{i} =\dfrac{2m_i}{k_i(k_i -1)}
 \subsection{Dataset}
 The Dataset analyzed in this research project represents the Swiss Railway and Tram Network. It contains 3’190 railway and tram stations all over Switzerland with 3'353 connections between them. The data set we used was provided by geo.admin.ch the official geo information portal of the swiss confederacy. The data is from the 20.12.2017 and includes GIS information and data about the different public transport companies in Switzerland. \autocite{Dataset}
 \\~\\
-The data about the railway stations includes an id, a station name and geographic data, as shown in table \ref{tbl:RailwayStationData}. The connection data included an id, a start and end node, track operator, electrification, track width, distance and geographic data. All stations and connections mapped on Switzerland can be seen in figure \ref{fig:NetworkOnMap}.
+The data about the railway stations includes an id, a station name and geographic data, as shown in Table \ref{tbl:RailwayStationData}. The connection data included an id, a start and end node, track operator, electrification, track width, distance and geographic data. All stations and connections mapped on Switzerland can be seen in Figure \ref{fig:NetworkOnMap}.
 
 \begin{table}[H]
 \centering
@@ -116,7 +116,7 @@ ch14uvag00092591 & Bern, Kursaal & POINT (2600835.989999998 1200203.734000001) \
 \end{center}
 
 \subsection{Data Preparation}
-While creating the graph for the network, we assigned the names of the stations as well as their location coordinates to the nodes. After that we added all the edges connecting to their respective stations. A visualization of this network can be seen in figure \ref{fig:NetworkNoMap}.
+While creating the graph for the network, we assigned the names of the stations as well as their location coordinates to the nodes. After that we added all the edges connecting to their respective stations. A visualization of this network can be seen in Figure \ref{fig:NetworkNoMap}.
 
 \begin{center}
     \centering
@@ -127,7 +127,7 @@ While creating the graph for the network, we assigned the names of the stations 
 \noindent
 Before starting with our analysis some minor data cleaning and preparation had to be done. Some of the bigger stations are subdivided into several data points, for example the station "Interlaken Ost" is sectioned by platforms ("Platform 1-2", "Platform 3-4", "Platform 5-8"). Also, some tram and independently managed train routes are not connected to the main network because stations that are right next to each other used different nodes ("Bern SBB", "Bern RBS"). This leads to the existence of nodes, which are geographically located next to each other, but nevertheless are not connected. The network is divided in 47 connected components, from which the biggest connected component includes 1650 nodes, which is around 53\% of the whole network. There are four nodes, which are not connected to any other node in the network. These nodes were excluded for the analysis of the network.
 \\~\\
-Because the network is divided in many connected components and the existence of close but not connected nodes, we decided to make some modifications to the network. Nodes whose spatial distance was less than 300 meters and no path between them existed, were merged to one node that includes the connections of all the merged nodes. This modification relies on the assumption that these nodes belong to the same station or are at least located in close walking distance. This results in a network with 3'146 nodes and 3'351 edges. The number of connected components is reduced to five, from which the giant connected component contains 99\% of all nodes in the network (3’116/3’146). This new better-connected network can be seen in figure \ref{fig:NetworkCleanedOnMap}.
+Because the network is divided in many connected components and the existence of close but not connected nodes, we decided to make some modifications to the network. Nodes whose spatial distance was less than 300 meters and no path between them existed, were merged to one node that includes the connections of all the merged nodes. This modification relies on the assumption that these nodes belong to the same station or are at least located in close walking distance. This results in a network with 3'146 nodes and 3'351 edges. The number of connected components is reduced to five, from which the giant connected component contains 99\% of all nodes in the network (3’116/3’146). This new better-connected network can be seen in Figure \ref{fig:NetworkCleanedOnMap}.
 
 \begin{center}
     \centering
@@ -137,8 +137,8 @@ Because the network is divided in many connected components and the existence of
 \end{center}
 
 
-\subsection{Characteristics of the Network}
-The emergence of the Railway network characterizes its degree distribution. There are few nodes with a relatively high degree, which represent the biggest traffic hubs, they are located in the economically most important cities of Switzerland (e.q. Basel, Bern, Geneva and Zurich). Most nodes do have only two connections to other stations. This follows the characteristic that most railway lines are going through stations in a sequenced fashion, with some start and end nodes with a degree of one and some connecting stations with a higher degree. The degree distribution can be seen in figure \ref{fig:DegreeDistribution}. This also explains the low clustering discovered in the network ($ C = 0.016 $). This distribution results in an average degree close to two ($ <k> = 2.13 $). The assortativity is 0.1678.
+\subsection{Characteristics Of The Network}
+The emergence of the Railway network characterizes its degree distribution. There are few nodes with a relatively high degree, which represent the biggest traffic hubs, they are located in the economically most important cities of Switzerland (e.q. Basel, Bern, Geneva and Zurich). Most nodes do have only two connections to other stations. This follows the characteristic that most railway lines are going through stations in a sequenced fashion, with some start and end nodes with a degree of one and some connecting stations with a higher degree. The degree distribution can be seen in Figure \ref{fig:DegreeDistribution}. This also explains the low clustering discovered in the network ($ C = 0.016 $). This distribution results in an average degree close to two ($ <k> = 2.13 $). The assortativity is 0.1678.
 
 \begin{center}
     \centering
@@ -148,16 +148,73 @@ The emergence of the Railway network characterizes its degree distribution. Ther
 \end{center}
 
 
+\section{Analysis}
+The goal of our analysis is to test the robustness of the Swiss Railway network, or in other words, we measure the connectedness of the network in case of failures or attacks on the network. For this purpose we remove nodes or edges from the network using random or targeted attacks. This simulates failures or disasters on certain routes or in certain train stations. Then we observe the effects of this simulation on the development of the biggest connected component in the network.  
+
+\subsection{Random And Targeted Attacks}
+Testing the robustness of the network by removing random nodes shows the stability of the network. When removing nodes randomly one needs to remove over 200 nodes to half the size of the giant component. When removing over 500 nodes, the network is almost completely broken down and less then 10\% of the network is connected in one giant component. A visualization of the random attack is provided in Figure \ref{fig:NodeRandomAttacks}.
+
+\begin{center}
+    \centering
+    \includegraphics[width=300pt]{Resources/node_random_attacks}
+    \captionof{figure}{Random attacks on the Swiss Railway network}
+    \label{fig:NodeRandomAttacks}
+\end{center}
+\noindent
+Comparing this to targeted attacks on the network, as seen in Figure \ref{fig:NodeTargetedDegreeAttacks}. The giant connected component breaks down a lot faster. After removing the 100 most central nodes, based on degree centrality, the biggest connected component is only about 1/6th of the giant connected component from the original network.
+
+\begin{center}
+    \centering
+    \includegraphics[width=300pt]{Resources/node_targeted_degree_attacks}
+    \captionof{figure}{Targeted attacks on the Swiss Railway network}
+    \label{fig:NodeTargetedDegreeAttacks}
+\end{center}
+
+
+\subsection{Different Targeted Node Attacks}
+If we compare different centrality measures on the network, we find very different results. Degree centrality and eigenvector centrality show “Zürich, Altstetten” and “Zürich, Langstrasse” as the most central nodes. Both of those are very close together and in close proximity of the “Zurich, Main station”, which the biggest train station in Switzerland and one of the most frequented train stations of the world. Compared to those measures the most central node according to the closeness centrality measure is the station “Olten, Bhf”, which lies in the center of the rail network and right in the center of the cities of Zurich, Bern and Basel. The most central node, according to the betweenness centrality, is the station “Wanzwil” near Herzogenbuchsee. This is a station that might be geographically in the center of the network but does not hold any significance to the Swiss Railway system.
+\\~\\
+Comparing the importance of these different measures, we simulated a targeted attack on the network by removing 100 nodes according to these different centrality measures. As seen in Figure \ref{fig:NodeTargetedAttacks}, removing nodes based on the betweenness centrality was the most effective way of breaking down the giant connected component. Followed by the strategy of removing the nodes based on closeness, degree and eigenvector centrality.
+
+\begin{center}
+    \centering
+    \includegraphics[width=300pt]{Resources/node_targeted_attacks}
+    \captionof{figure}{Targeted attacks on 100 nodes of the Swiss Railway network}
+    \label{fig:NodeTargetedAttacks}
+\end{center}
+
+\subsection{Attacks On Edges}
+While failures that lay down an entire train station and stop any trains from passing trough it, do happen, they are rarer than failures on a certain track that stop all traffic from using that connection. This lead us to also simulate the failures of multiple edges of the railway network. As before with the attacks on nodes, we also simulated random and targeted attacks on the edged of the network. As a measure of centrality we used the edge betweenness centrality and as in the simulation before the targeted attacks where more effective in breaking down the giant connected component. Figures \ref{fig:EdgeRandomAttacks} and \ref{fig:EdgeTargetedAttacks} show the results of a random and targeted edge attack respectively.
+
+\begin{center}
+    \centering
+    \includegraphics[width=300pt]{Resources/edge_random_attacks}
+    \captionof{figure}{Random attacks on edges instead of nodes}
+    \label{fig:EdgeRandomAttacks}
+\end{center}
+
+\begin{center}
+    \centering
+    \includegraphics[width=300pt]{Resources/edge_targeted_attacks}
+    \captionof{figure}{Targeted attacks on edges instead of nodes}
+    \label{fig:EdgeTargetedAttacks}
+\end{center}
+
+\subsection{Comparison To Random Networks}
+Random graph models are frequently used to predict the behaviour of networks with pretended characteristics. These characteristics are, for example, the degree distribution or the global clustering in the network. To compare the behaviour of the Swiss Railway network to failures, we used an Erdös-Renyi (ER) random model as well as a Barabási-Albert (BA) random model.
+\\~\\
+When creating an ER random model, a graph with a given number of nodes is generated. Between every pair of node, with probability $ p $, an edge is added to the graph. This random generated model are characterized by a degree distribution, which follow a poisson distribution with $ <k> = np $ as well as a clustering coefficient close to the edge creation probability $ p $.
+\\~\\
+The degree distribution of many networks observed in reality do no not follow a poisson distribution. Therefore the need for random models with different characteristics arises. Often observed networks follow a power-law distribution of node degrees. The power-law distribution is characterized by the existence of a very high number of low-degree nodes and the existence of few nodes with very high degree. Since the Swiss Railway network has a high number of nodes with degree equal to two and only a few nodes that have a degree up to 7, it might be worth to compare the network to a random graph following a power-law distribution. An example of such a random graph is the BA model. This model incorporates the two mechanisms "growth" and "preferential attachment" which are often observed in reality and lead to power-law distributions. The nodes in the BA random graph are created one after another and every new node is connected to a given amount of existing nodes, where nodes with higher degree are preferred.
+\\~\\
+The theoretical characteristics of the two random graph models suggests that ER graphs are equally vulnerable to random as well as targeted attacks. BA graphs on the other hand are more vulnerable to targeted attacks than to random attacks. That is because when the nodes fail randomly, the probability is high, that a low degree node fails. In contrast targeted attacks might aim at high degree nodes.
+
 \section{Conclusion}
-The Swiss Railway network is important to the Swiss citizens as well as the Swiss economy. Yet, increasing demand and tight schedules are a constant challence. However, there is a limit to the network especially because few new lines are added. This means that it is all the more important to understand how delays or failures influence the network.
+The Swiss Railway network is important to the Swiss citizens as well as the Swiss economy. Yet, increasing demand and tight schedules are a constant challenge. However, there is a limit to the network especially because few new lines are added. This means that it is all the more important to understand how delays or failures influence the network. This research project investigates the vulnerability of the Swiss Railway network. 
 \\~\\
-This research project investigated the vulnerability of the Swiss Railway network. 
+We found that the network is quite robust against random attacks. Even though small parts of the network begin to disconnect from the giant component, more than 200 nodes need to be removed to half the size of the giant component. However, the capacity of trains might be impacted if an important node or edge of the network is defective. But, the overall connectedness of the network only starts to break down if hundreds of nodes or edges fail at the same time.
 \\~\\
-An appropriate countermeasure could be to split important stations into independent sub-networks such that a failure does not propagate through the whole network. 
-\\~\\
-This research project does not cover...
-\\~\\
-It remains to be further investigated...
+Furthermore, we found that the Swiss Railway network is at risk of targeted attacks. Breaking down the traffic in 10 selected stations impacts the network significantly. Even the biggest connected part of the remaining network would be less than half as big as it was before. An appropriate countermeasure to improve the network could be to split important stations into independent sub-networks such that targeted attacks do not break down the whole system. 
 
 \printbibliography
 
