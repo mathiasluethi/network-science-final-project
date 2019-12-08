@@ -1,5 +1,6 @@
 \documentclass{Resources/netsci-project}
 \usepackage{caption}
+\usepackage{float}
 
 % :::~ This is the configuration for the bibliography. DO NOT CHANGE
 \usepackage[
@@ -34,7 +35,7 @@ Railway networks are of great importance for every economy \autocite{Resilience}
 
 
 \section{Introduction}
-Railway systems need to perform well even under suboptimal circumstances \autocite{Resilience}. Cascade delays and cancellations are daily challenges for both passengers and railway companies \autocite{Resilience}. Existing research showed that the network topology has an effect on the performance of a railway system \autocite{ComplexTopology}. More recently, \textcite{Resilience} analyzed the resilience and robustness of a UK railway network. They showed that poor performance correlates more with cascade effects that failures \autocite{Resilience}.
+Railway systems need to perform well even under suboptimal circumstances \autocite{Resilience}. Delays and cancellations are daily challenges for both passengers and railway companies \autocite{Resilience}. Existing research showed that the network topology has an effect on the performance of a railway system \autocite{ComplexTopology}. More recently, \textcite{Resilience} analyzed the resilience and robustness of a UK railway network. They showed that poor performance correlates more with cascade effects that failures \autocite{Resilience}.
 \\~\\
 Needless to say, the are many reasons why railway systems can fail. For this reason, the focus of this study is the Swiss railway system for which only few studies exist. In 2008, the authors \textcite{GraphSwiss} published a graph-theoretical analysis of the Swiss railway network over time. They've used measures such as degree/betweenness centrality to characterise the growth of the Railway network \autocite{GraphSwiss}. However, they've suggested further research to explain the robustness of the network. In 2009, the authors \textcite{VulnerabilitySwiss} proposed a generalized linear model (GLM) to assess the vulnerability of the Swiss road network. The downside of their approach is that they assumed the failures to be mutually exclusive \autocite{VulnerabilitySwiss}. 
 \\~\\
@@ -85,19 +86,67 @@ C_{i} =\dfrac{2m_i}{k_i(k_i -1)}
 \end{equation}
 
 \section{Data}
-The Dataset analysed in this research project is from the \textcite{Dataset} and represents the Swiss Railway and Tram Network. It contains 3’190 Railway and Tram stations all over Switzerland with 3'353 connections between them. While creating the graph for the network, we assigned the names of the stations as well as their location coordinates to the nodes.
+\subsection{Dataset}
+The Dataset analyzed in this research project represents the Swiss Railway and Tram Network. It contains 3’190 railway and tram stations all over Switzerland with 3'353 connections between them. The data set we used was provided by geo.admin.ch the official geo information portal of the swiss confederacy. The data is from the 20.12.2017 and includes GIS information and data about the different public transport companies in Switzerland. \autocite{Dataset}
 \\~\\
-Some of the bigger stations are subdivided into several sub-stations, for example the station "Interlaken Ost" is sectioned by platforms ("Platform 1-2", "Platform 3-4", "Platform 5-8"). This leads to the existence of nodes, whose spatial distance is rather small nevertheless they are not connected. The network is divided in 47 connected components, from which the giant connected component includes 1650 nodes, which is around 53\% of the whole network. There are four nodes, which are not connected to any other node in the network. These nodes were excluded for the analysis of the network.
+The data about the railway stations includes an id, a station name and geographic data, as shown in table \ref{tbl:RailwayStationData}. The connection data included an id, a start and end node, track operator, electrification, track width, distance and geographic data. All stations and connections mapped on Switzerland can be seen in figure \ref{fig:NetworkOnMap}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c c c }
+\hline 
+xtf-id & Betriebspunkt-Name &  geometry\\ 
+\hline 
+ch14uvag00092584 & Wabern, Eichholz & POINT (2600987.93 1197507.6371) \\
+ch14uvag00092599 & Bern, Sandrain & POINT (2600494.741999999 1197843.540100001) \\
+ch14uvag00092576 & Basel, Rheingasse & POINT (2611516.495999999 1267823.809999999) \\
+ch14uvag00092992 & Zürich, Schiffbau & POINT (2681631.868000001 1249127.912) \\
+ch14uvag00092591 & Bern, Kursaal & POINT (2600835.989999998 1200203.734000001) \\
+\hline 
+\end{tabular}
+\caption{Railway station data}
+\label{tbl:RailwayStationData}
+\end{table}
+
+\begin{center}
+    \centering
+    \includegraphics[width=300pt]{Resources/Network_on_map}
+    \captionof{figure}{Railway and tram network mapped on Switzerland}
+    \label{fig:NetworkOnMap}
+\end{center}
+
+\subsection{Data Preparation}
+While creating the graph for the network, we assigned the names of the stations as well as their location coordinates to the nodes. After that we added all the edges connecting to their respective stations. A visualization of this network can be seen in figure \ref{fig:NetworkNoMap}.
+
+\begin{center}
+    \centering
+    \includegraphics[width=300pt]{Resources/Network_no_map}
+    \captionof{figure}{Railway and tram network of Switzerland not geographically mapped}
+    \label{fig:NetworkNoMap}
+\end{center}
+\noindent
+Before starting with our analysis some minor data cleaning and preparation had to be done. Some of the bigger stations are subdivided into several data points, for example the station "Interlaken Ost" is sectioned by platforms ("Platform 1-2", "Platform 3-4", "Platform 5-8"). Also, some tram and independently managed train routes are not connected to the main network because stations that are right next to each other used different nodes ("Bern SBB", "Bern RBS"). This leads to the existence of nodes, which are geographically located next to each other, but nevertheless are not connected. The network is divided in 47 connected components, from which the biggest connected component includes 1650 nodes, which is around 53\% of the whole network. There are four nodes, which are not connected to any other node in the network. These nodes were excluded for the analysis of the network.
 \\~\\
-Because of the fact that the network is divided in many connected components and the existence of close but not connected nodes, we decided to adjust the network. Nodes whose spatial distance is less than 300 meters and no path between them exist, are merged to one node that includes the connections of all the merged nodes. This modification relies on the assumption that these nodes belong to the same station or are at least located in walking distance. This results in a network with 3'146 nodes and 3'351 edges. The number of connected components is reduced to five, from which the giant connected component contains 99\% of all nodes in the network (3’116/3’146). Figure \ref{fig:degree_distribution} shows the degree distribution of the network.
+Because the network is divided in many connected components and the existence of close but not connected nodes, we decided to make some modifications to the network. Nodes whose spatial distance was less than 300 meters and no path between them existed, were merged to one node that includes the connections of all the merged nodes. This modification relies on the assumption that these nodes belong to the same station or are at least located in close walking distance. This results in a network with 3'146 nodes and 3'351 edges. The number of connected components is reduced to five, from which the giant connected component contains 99\% of all nodes in the network (3’116/3’146). This new better-connected network can be seen in figure \ref{fig:NetworkCleanedOnMap}.
+
+\begin{center}
+    \centering
+    \includegraphics[width=300pt]{Resources/Network_cleaned_on_map}
+    \captionof{figure}{Modified railway network with only 5 connected components}
+    \label{fig:NetworkCleanedOnMap}
+\end{center}
+
+
+\subsection{Characteristics of the Network}
+The emergence of the Railway network characterizes its degree distribution. There are few nodes with a relatively high degree, which represent the biggest traffic hubs, they are located in the economically most important cities of Switzerland (e.q. Basel, Bern, Geneva and Zurich). Most nodes do have only two connections to other stations. This follows the characteristic that most railway lines are going through stations in a sequenced fashion, with some start and end nodes with a degree of one and some connecting stations with a higher degree. The degree distribution can be seen in figure \ref{fig:DegreeDistribution}. This also explains the low clustering discovered in the network ($ C = 0.016 $). This distribution results in an average degree close to two ($ <k> = 2.13 $). The assortativity is 0.1678.
 
 \begin{center}
     \centering
     \includegraphics[width=300pt]{Resources/degree_distribution}
-    \captionof{figure}{Degree Distribution of the Swiss Railway Network}
-    \label{fig:degree_distribution}
+    \captionof{figure}{Degree distribution of the swiss railway network}
+    \label{fig:DegreeDistribution}
 \end{center}
-The emergence of the Railway network characterizes its degree distribution. There are few nodes with a relatively high degree, which represent the biggest traffic hubs and are located in the economically most important cities of Switzerland (e.g. Zurich and Basel). Most nodes do have two connections to other stations. This follows the characteristic that most routes are straight lines going through nodes and ending in a node with degree one. Furthermore, it also explains the low clustering discovered in the network ($ C = 0.016 $). Last but not least, the distribution results in an average degree close to two ($ <k> = 2.13 $). 
+
 
 \section{Conclusion}
 The Swiss Railway network is important to the Swiss citizens as well as the Swiss economy. Yet, increasing demand and tight schedules are a constant challence. However, there is a limit to the network especially because few new lines are added. This means that it is all the more important to understand how delays or failures influence the network.
