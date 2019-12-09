@@ -1,0 +1,4 @@
+Eigenvector centrality is an extension of the degree centrality. Other than in the degree centrality measure,
+eigenvector centrality also accounts for the importance of the adjacent nodes.This means not all connections in the network are equal.
+Eigenvector centrality is calulated by assessing how well connected an individual is to the part of the network, which is also highly connected. 
+This can be written as the Eigenvector equation:
